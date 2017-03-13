@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+
+<?php
+	session_start();
+	$form_token = md5(uniqid('auth', true));
+	$_SESSION['form_token'] = $form_token;
+?>
+
+
+<html>
+<head>
+<title>SignIn</title>
+<link rel="stylesheet" href="css/foundation.css" />
+</head>
+<body>
+	 <h2>Sign in</h2>
+
+	<div class="panel" style="width: 35%">	
+        <form action="login.php" method="post">
+        <p>
+                <label for="a_username">Username</label>
+                <input type="text" id="a_username" name="a_username" maxlength="20" style="width: 35%" />
+        </p>
+        <p>
+                <label for="a_password">Password</label>
+		<input type="password" id="a_password" name="a_password" maxlength="20" style="width: 35%" />
+        </p>
+        <p>
+                <input type="submit" value="Login" class="button" />
+        </p>
+        </form>
+
+	<form action = "signup.html" method = "post">
+	<p>
+		<input type="submit" value="Signup!" class="button" />
+	</p>
+	</form>
+	</div>
+
+</body>
+</html>

@@ -1,0 +1,71 @@
+<html>
+<head>
+<title>Homepage</title>
+<link rel="stylesheet" href="css/foundation.css" />
+</head>
+<body>
+	<?php
+		session_start();
+		
+		mysql_connect('localhost', 'root', '') or die(mysql_error());
+		mysql_select_db('vulnstore') or die(mysql_error());
+		$user = $_SESSION['user'];
+		$query = "select balance from users where username = '$user'";
+		$result = mysql_query($query) or die(mysql_error());
+		
+		$bal = mysql_fetch_row($result); //bal[0] is balance b/c array
+	?>
+
+<!-- ----------------------- TOP NAV BAR IS HERE -------------------- -->
+
+	<nav class="top-bar">
+		<ul class="title-area">
+			<li class="name"><h1><a href="homepage.php">VulnStore</a></h1></li>
+		</ul>
+
+		<section class="top-bar-section">
+			<ul class="right">
+				<li><a><?php echo "Bal: " .$bal[0] ?></a></li>
+				<li><a href="your_store.php"><?php echo $_SESSION['user'] ?></a></li>	
+				<li><a href="logout.php">Logout</a></li>
+			</ul>
+		</section>
+	</nav>
+
+
+	
+	<ul class="large-block-grid-4">	
+	
+<!-- ----------------- SEARCH PRODUCTS IS HERE --------------------- -->
+	<div class="panel clearfix" style="width: 50%">
+	<form action="search_db.php" method="post">
+		<p>
+			<h3>Search Products</h3>
+			<input type="text" id="search" name="search" maxlength="50" />
+			<input type="submit" value="Search Products!" class="button right" />
+		</p>
+	</form>
+	</div>
+	
+<!-- ----------------- SEARCH USERS STORE IS HERE ------------------- -->
+	<form action="search_us.php" method="post">
+	<div class="panel clearfix" style ="width: 50%">	
+		<p>
+			<h3>Search User Store</h3>
+			<input type="text" id="search_us" name="search_us" maxlength="30"/>
+			<input type="submit" value="Search!" class="button right" />
+		</p>
+	</div>
+	</form>
+
+<!-- ------------------- YOUR STORE IS HERE -------------------------- -->
+	<form action="your_store.php" method="post">
+		<p>
+			<input type="submit" value="Your Store" class="button"/>
+		</p>
+	</form>
+
+	</ul>
+
+</body>
+</html>
